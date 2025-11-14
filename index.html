@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,216 +12,252 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* Custom CSS Variables and Animations */
+        :root {
+            --primary-red: #8B0000;
+            --secondary-red: #B22222;
+            --accent-red: #DC143C;
+            --dark-black: #0A0A0A;
+            --medium-black: #1A1A1A;
         }
 
+        /* Fixed Animated Background */
         body {
             font-family: 'Lato', sans-serif;
-            background-color: #0D0D0D;
-            color: #EAEAEA;
             overflow-x: hidden;
+            position: relative;
+            background: #0A0A0A;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(-45deg, #0A0A0A, #1A0505, #0D0D0D, #1A0000, #0A0A0A);
+            background-size: 400% 400%;
+            animation: gradientShift 18s ease infinite;
+            z-index: 0;
         }
 
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Montserrat', sans-serif;
             font-weight: 200;
-            letter-spacing: -0.025em;
         }
 
-        /* Custom Animations */
-        @keyframes fadeInUp {
-            from {
+        /* Animated Background Gradient */
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Wine Bubbles Animation - Elegant rising bubbles */
+        .wine-bubble {
+            position: fixed;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(220, 20, 60, 0.4), rgba(139, 0, 0, 0.3));
+            animation: bubbleRise 8s ease-in infinite;
+            pointer-events: none;
+            z-index: 10;
+            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        @keyframes bubbleRise {
+            0% {
+                transform: translateY(100vh) translateX(0) scale(0);
                 opacity: 0;
-                transform: translateY(30px);
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            10% {
+                opacity: 0.7;
+                transform: translateY(90vh) scale(1);
             }
-        }
-
-        @keyframes fadeIn {
-            from {
+            50% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.2;
+            }
+            100% {
+                transform: translateY(-10vh) translateX(30px) scale(0.8);
                 opacity: 0;
             }
-            to {
-                opacity: 1;
-            }
         }
 
-        @keyframes slideInFromLeft {
-            from {
+        /* Wine bubbles on LEFT side */
+        .wine-bubble.left:nth-child(1) { left: 3%; width: 12px; height: 12px; animation-delay: 0s; animation-duration: 9s; }
+        .wine-bubble.left:nth-child(2) { left: 7%; width: 8px; height: 8px; animation-delay: 2s; animation-duration: 8s; }
+        .wine-bubble.left:nth-child(3) { left: 4%; width: 10px; height: 10px; animation-delay: 4s; animation-duration: 9.5s; }
+        .wine-bubble.left:nth-child(4) { left: 8%; width: 14px; height: 14px; animation-delay: 6s; animation-duration: 7.5s; }
+        .wine-bubble.left:nth-child(5) { left: 5%; width: 9px; height: 9px; animation-delay: 8s; animation-duration: 10s; }
+        .wine-bubble.left:nth-child(6) { left: 9%; width: 11px; height: 11px; animation-delay: 3s; animation-duration: 8.5s; }
+        .wine-bubble.left:nth-child(7) { left: 3.5%; width: 7px; height: 7px; animation-delay: 7s; animation-duration: 9.2s; }
+        .wine-bubble.left:nth-child(8) { left: 6.5%; width: 13px; height: 13px; animation-delay: 5s; animation-duration: 8.8s; }
+
+        /* Wine bubbles on RIGHT side */
+        .wine-bubble.right:nth-child(9) { right: 3%; width: 11px; height: 11px; animation-delay: 1s; animation-duration: 9s; }
+        .wine-bubble.right:nth-child(10) { right: 7%; width: 9px; height: 9px; animation-delay: 3s; animation-duration: 8.5s; }
+        .wine-bubble.right:nth-child(11) { right: 4%; width: 12px; height: 12px; animation-delay: 5s; animation-duration: 9.8s; }
+        .wine-bubble.right:nth-child(12) { right: 8%; width: 10px; height: 10px; animation-delay: 7s; animation-duration: 7.8s; }
+        .wine-bubble.right:nth-child(13) { right: 5%; width: 8px; height: 8px; animation-delay: 2s; animation-duration: 10.2s; }
+        .wine-bubble.right:nth-child(14) { right: 9%; width: 14px; height: 14px; animation-delay: 4s; animation-duration: 8.2s; }
+        .wine-bubble.right:nth-child(15) { right: 3.5%; width: 7px; height: 7px; animation-delay: 8s; animation-duration: 9.5s; }
+        .wine-bubble.right:nth-child(16) { right: 6.5%; width: 13px; height: 13px; animation-delay: 6s; animation-duration: 8.9s; }
+
+        /* Pasta/Food Particles - Slow floating shapes */
+        .food-particle {
+            position: fixed;
+            border-radius: 45% 55% 60% 40% / 50% 45% 55% 50%;
+            background: radial-gradient(ellipse at 35% 35%, rgba(178, 34, 34, 0.6), rgba(139, 0, 0, 0.4));
+            animation: foodFloat 50s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 10;
+            filter: blur(1px);
+            box-shadow: 0 0 25px rgba(220, 20, 60, 0.3);
+        }
+
+        @keyframes foodFloat {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
                 opacity: 0;
-                transform: translateX(-50px);
             }
-            to {
-                opacity: 1;
-                transform: translateX(0);
+            10% {
+                opacity: 0.5;
             }
-        }
-
-        @keyframes slideInFromRight {
-            from {
+            50% {
+                transform: translate(40px, -50vh) rotate(180deg);
+                opacity: 0.4;
+            }
+            90% {
+                opacity: 0.2;
+            }
+            100% {
+                transform: translate(80px, -100vh) rotate(360deg);
                 opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
             }
         }
 
-        .hero-title {
-            animation: fadeInUp 1s ease-out 0.5s both;
-        }
+        .food-particle:nth-child(1) { left: 20%; top: 100%; width: 60px; height: 50px; animation-delay: 0s; animation-duration: 55s; }
+        .food-particle:nth-child(2) { left: 65%; top: 100%; width: 80px; height: 65px; animation-delay: 4s; animation-duration: 60s; }
+        .food-particle:nth-child(3) { left: 40%; top: 100%; width: 70px; height: 55px; animation-delay: 8s; animation-duration: 58s; }
+        .food-particle:nth-child(4) { left: 80%; top: 100%; width: 55px; height: 45px; animation-delay: 12s; animation-duration: 52s; }
+        .food-particle:nth-child(5) { left: 30%; top: 100%; width: 75px; height: 60px; animation-delay: 2s; animation-duration: 56s; }
+        .food-particle:nth-child(6) { left: 55%; top: 100%; width: 65px; height: 52px; animation-delay: 6s; animation-duration: 54s; }
 
-        .hero-subtitle {
-            animation: fadeInUp 1s ease-out 0.8s both;
-        }
-
-        .hero-cta {
-            animation: fadeInUp 1s ease-out 1.1s both;
-        }
-
-        .content-pane {
+        /* Fade In Up Animation */
+        .fade-in-up {
             opacity: 0;
-            transition: opacity 0.8s ease-in-out, backdrop-filter 0.8s ease-in-out;
+            transform: translateY(30px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
         }
 
-        .content-pane.visible {
+        .fade-in-up.visible {
             opacity: 1;
-            backdrop-filter: blur(8px);
+            transform: translateY(0);
         }
 
-        /* Parallax effect */
-        .parallax {
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-
-        /* Navigation styles */
+        /* Navigation Scroll Effect */
         nav {
             transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 200;
         }
 
         nav.scrolled {
-            backdrop-filter: blur(12px);
-            background-color: rgba(13, 13, 13, 0.9);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            background: rgba(10, 10, 10, 0.98) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(139, 0, 0, 0.5);
         }
 
-        .nav-link {
-            position: relative;
-            transition: color 0.3s ease;
+        /* Hover Effects */
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background-color: #D4AF37;
-            transition: width 0.3s ease;
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(220, 20, 60, 0.4);
         }
 
-        .nav-link:hover::after {
-            width: 100%;
+        /* Text Glow Effect */
+        .text-glow {
+            text-shadow: 0 0 20px rgba(220, 20, 60, 0.6);
         }
 
-        .nav-link:hover {
-            color: #D4AF37;
-        }
-
-        /* Button styles */
+        /* Button Hover Effect */
         .btn-primary {
-            background-color: #D4AF37;
-            color: #0D0D0D;
-            padding: 12px 32px;
-            border-radius: 2px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-            border: none;
-            cursor: pointer;
-            display: inline-block;
-            text-decoration: none;
-        }
-
-        .btn-primary:hover {
-            background-color: #E5C158;
-            box-shadow: 0 6px 25px rgba(212, 175, 55, 0.5);
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: #D4AF37;
-            padding: 12px 32px;
-            border: 1px solid #D4AF37;
-            border-radius: 2px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            display: inline-block;
-            text-decoration: none;
-        }
-
-        .btn-secondary:hover {
-            background-color: #D4AF37;
-            color: #0D0D0D;
-            transform: translateY(-2px);
-        }
-
-        /* Menu item hover effect */
-        .menu-item {
-            transition: all 0.3s ease-in;
-            padding: 16px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .menu-item:hover {
-            background-color: #1a1a1a;
-            color: #D4AF37;
-        }
-
-        /* Image overlay effects */
-        .image-overlay {
             position: relative;
             overflow: hidden;
-        }
-
-        .image-overlay::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to bottom, rgba(13, 13, 13, 0.3), rgba(13, 13, 13, 0.7));
             z-index: 1;
         }
 
-        .image-overlay img {
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+            z-index: -1;
+        }
+
+        .btn-primary:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Menu Item Hover */
+        .menu-item {
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .menu-item:hover {
+            border-left: 3px solid #DC143C;
+            padding-left: 1.5rem;
+            background: rgba(220, 20, 60, 0.15);
+        }
+
+        /* Content sections */
+        .content-section {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Card backgrounds for readability */
+        .content-card {
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(220, 20, 60, 0.2);
+        }
+
+        /* Gallery image effects */
+        .gallery-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(220, 20, 60, 0.2);
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(220, 20, 60, 0.4);
+            border-color: rgba(220, 20, 60, 0.5);
+        }
+
+        .gallery-card img {
             transition: transform 0.6s ease;
         }
 
-        .image-overlay:hover img {
-            transform: scale(1.05);
+        .gallery-card:hover img {
+            transform: scale(1.1);
         }
 
         /* Smooth scroll */
@@ -229,80 +265,9 @@
             scroll-behavior: smooth;
         }
 
-        /* Shadow effects for Ombra theme */
-        .shadow-ombra {
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0, 0, 0, 0.4);
-        }
-
-        .shadow-ombra-hover {
-            transition: box-shadow 0.3s ease;
-        }
-
-        .shadow-ombra-hover:hover {
-            box-shadow: 0 15px 50px rgba(212, 175, 55, 0.2), 0 5px 15px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Glass morphism */
-        .glass {
-            background: rgba(26, 26, 26, 0.3);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(234, 234, 234, 0.1);
-        }
-
-        /* Hero section */
-        .hero {
-            min-height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to bottom, rgba(13, 13, 13, 0.4), rgba(13, 13, 13, 0.7));
-            z-index: 1;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            padding: 20px;
-        }
-
-        /* Fade in on scroll */
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .fade-in-section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
         /* Mobile menu */
         .mobile-menu {
             display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(13, 13, 13, 0.98);
-            z-index: 1000;
-            padding: 80px 20px 20px;
-            flex-direction: column;
-            gap: 30px;
-            backdrop-filter: blur(10px);
         }
 
         .mobile-menu.active {
@@ -351,87 +316,129 @@
         }
 
         ::-webkit-scrollbar-track {
-            background: #0D0D0D;
+            background: #0A0A0A;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #1a1a1a;
+            background: #8B0000;
             border-radius: 5px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: #D4AF37;
+            background: #DC143C;
         }
     </style>
 </head>
-<body>
-    <!-- Navigation -->
-    <nav id="navbar" class="fixed w-full z-50 py-4 px-6 md:px-12 transition-all duration-300">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="text-2xl font-light tracking-wider">
-                <a href="#" class="text-white hover:text-[#D4AF37] transition-colors duration-300">OMBRA</a>
-            </div>
+<body class="text-white">
+    <!-- Wine Bubbles on LEFT side -->
+    <div class="wine-bubble left"></div>
+    <div class="wine-bubble left"></div>
+    <div class="wine-bubble left"></div>
+    <div class="wine-bubble left"></div>
+    <div class="wine-bubble left"></div>
+    <div class="wine-bubble left"></div>
+    <div class="wine-bubble left"></div>
+    <div class="wine-bubble left"></div>
 
-            <!-- Desktop Navigation -->
-            <div class="desktop-nav hidden md:flex items-center gap-8">
-                <a href="#story" class="nav-link text-sm uppercase tracking-wide">Our Story</a>
-                <a href="#menu" class="nav-link text-sm uppercase tracking-wide">Menu</a>
-                <a href="#experience" class="nav-link text-sm uppercase tracking-wide">Experience</a>
-                <a href="#contact" class="nav-link text-sm uppercase tracking-wide">Contact</a>
-                <a href="#reserve" class="btn-primary text-sm">Reserve</a>
-            </div>
+    <!-- Wine Bubbles on RIGHT side -->
+    <div class="wine-bubble right"></div>
+    <div class="wine-bubble right"></div>
+    <div class="wine-bubble right"></div>
+    <div class="wine-bubble right"></div>
+    <div class="wine-bubble right"></div>
+    <div class="wine-bubble right"></div>
+    <div class="wine-bubble right"></div>
+    <div class="wine-bubble right"></div>
 
-            <!-- Mobile Hamburger -->
-            <div class="hamburger md:hidden" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+    <!-- Food Particles - Rising from bottom -->
+    <div class="food-particle"></div>
+    <div class="food-particle"></div>
+    <div class="food-particle"></div>
+    <div class="food-particle"></div>
+    <div class="food-particle"></div>
+    <div class="food-particle"></div>
+
+    <!-- Sticky Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm transition-all duration-300" style="background: rgba(10, 10, 10, 0.95);">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+                    <span class="text-white text-2xl md:text-3xl tracking-widest" style="font-weight: 200; letter-spacing: 0.2em;">OMBRA</span>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="desktop-nav hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-white hover:text-[#DC143C] transition-colors duration-300 text-sm uppercase tracking-wider" style="font-weight: 200;">Home</a>
+                    <a href="#story" class="text-white hover:text-[#DC143C] transition-colors duration-300 text-sm uppercase tracking-wider" style="font-weight: 200;">Our Story</a>
+                    <a href="#menu" class="text-white hover:text-[#DC143C] transition-colors duration-300 text-sm uppercase tracking-wider" style="font-weight: 200;">Menu</a>
+                    <a href="#experience" class="text-white hover:text-[#DC143C] transition-colors duration-300 text-sm uppercase tracking-wider" style="font-weight: 200;">Experience</a>
+                    <a href="#contact" class="text-white hover:text-[#DC143C] transition-colors duration-300 text-sm uppercase tracking-wider" style="font-weight: 200;">Contact</a>
+                    <a href="#reserve" class="btn-primary bg-[#8B0000] text-white px-8 py-3 rounded-full text-sm uppercase tracking-wider hover:bg-[#DC143C] transition-all duration-300 shadow-lg">Reserve</a>
+                </div>
+
+                <!-- Mobile Hamburger -->
+                <div class="hamburger md:hidden" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-98 z-1000 pt-20 pb-8 flex-col items-center gap-8" id="mobileMenu">
+            <a href="#home" class="text-white hover:text-[#DC143C] text-2xl uppercase tracking-wider mobile-menu-link">Home</a>
+            <a href="#story" class="text-white hover:text-[#DC143C] text-2xl uppercase tracking-wider mobile-menu-link">Our Story</a>
+            <a href="#menu" class="text-white hover:text-[#DC143C] text-2xl uppercase tracking-wider mobile-menu-link">Menu</a>
+            <a href="#experience" class="text-white hover:text-[#DC143C] text-2xl uppercase tracking-wider mobile-menu-link">Experience</a>
+            <a href="#contact" class="text-white hover:text-[#DC143C] text-2xl uppercase tracking-wider mobile-menu-link">Contact</a>
+            <a href="#reserve" class="btn-primary bg-[#8B0000] text-white px-10 py-4 rounded-full text-lg uppercase tracking-wider mobile-menu-link">Reserve a Table</a>
         </div>
     </nav>
 
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
-        <a href="#story" class="text-2xl uppercase tracking-wide text-center hover:text-[#D4AF37] transition-colors mobile-menu-link">Our Story</a>
-        <a href="#menu" class="text-2xl uppercase tracking-wide text-center hover:text-[#D4AF37] transition-colors mobile-menu-link">Menu</a>
-        <a href="#experience" class="text-2xl uppercase tracking-wide text-center hover:text-[#D4AF37] transition-colors mobile-menu-link">Experience</a>
-        <a href="#contact" class="text-2xl uppercase tracking-wide text-center hover:text-[#D4AF37] transition-colors mobile-menu-link">Contact</a>
-        <a href="#reserve" class="btn-primary text-center mobile-menu-link">Reserve a Table</a>
-    </div>
-
     <!-- Hero Section -->
-    <section class="hero">
-        <img src="./materials/image_3.png" alt="Ombra Italian Eatery Interior" class="absolute inset-0 w-full h-full object-cover">
-        <div class="hero-content">
-            <h1 class="hero-title text-5xl md:text-7xl lg:text-8xl font-extralight tracking-tight mb-6">OMBRA</h1>
-            <p class="hero-subtitle text-xl md:text-2xl font-light text-[#A8A8A8] mb-8 tracking-wide">A Culinary Journey by Chef Alfredo Esposito</p>
-            <a href="#reserve" class="hero-cta btn-primary">Reserve a Table</a>
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden content-section">
+        <!-- Content -->
+        <div class="relative z-10 text-center px-6">
+            <h1 class="text-6xl md:text-8xl lg:text-9xl text-white mb-6 text-glow" style="font-weight: 200; letter-spacing: 0.15em;">
+                OMBRA
+            </h1>
+            <p class="text-2xl md:text-4xl text-white mb-4 font-light">Italian Eatery</p>
+            <p class="text-xl md:text-2xl text-gray-300 mb-4 font-light italic">A Culinary Journey by Chef Alfredo Esposito</p>
+            <p class="text-lg text-gray-400 mb-12 max-w-2xl mx-auto">Michelin-Starred Excellence in the Heart of San Juan</p>
+            <a href="#reserve" class="btn-primary inline-block bg-[#8B0000] text-white px-12 py-5 text-lg rounded-full hover:bg-[#DC143C] transition-all duration-300 shadow-lg uppercase tracking-wider">
+                Reserve a Table
+            </a>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce z-10">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
         </div>
     </section>
 
     <!-- Chef Story Section -->
-    <section id="story" class="relative py-24 md:py-32 overflow-hidden">
-        <div class="absolute inset-0">
-            <img src="./materials/image_8.jpg" alt="Restaurant ambiance" class="w-full h-full object-cover opacity-20">
-        </div>
-
-        <div class="relative z-10 max-w-6xl mx-auto px-6 md:px-12">
+    <section id="story" class="py-20 px-6 content-section">
+        <div class="container mx-auto max-w-6xl">
             <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="fade-in-section">
-                    <div class="image-overlay shadow-ombra">
-                        <img src="./materials/image_10.jpg" alt="Chef Alfredo Esposito" class="w-full h-auto rounded-sm">
+                <div class="fade-in-up">
+                    <div class="hover-lift overflow-hidden rounded-lg">
+                        <img src="./materials/image_10.jpg" alt="Chef Alfredo Esposito" class="w-full h-auto rounded-lg shadow-2xl">
                     </div>
                 </div>
 
-                <div class="fade-in-section content-pane glass p-8 md:p-12 rounded-sm shadow-ombra">
-                    <h2 class="text-3xl md:text-5xl mb-6 text-[#D4AF37]">The Legacy of Chef Alfredo Esposito</h2>
-                    <p class="text-base md:text-lg text-[#A8A8A8] leading-relaxed mb-6">
+                <div class="fade-in-up content-card p-8 md:p-12 rounded-lg shadow-xl">
+                    <h2 class="text-4xl md:text-5xl mb-6 text-[#DC143C]">The Legacy of Chef Alfredo Esposito</h2>
+                    <p class="text-lg text-gray-300 mb-6 leading-relaxed">
                         Born in Abruzzo, Italy, Chef Alfredo Esposito carries forward a 130-year family culinary tradition. His journey from the hills of Italy to the vibrant streets of San Juan has been marked by Michelin recognition and an unwavering commitment to authentic Italian cuisine.
                     </p>
-                    <p class="text-base md:text-lg text-[#A8A8A8] leading-relaxed mb-6">
+                    <p class="text-lg text-gray-300 mb-6 leading-relaxed">
                         At Ombra, Chef Esposito weaves together traditional recipes passed down through generations with innovative Mediterranean techniques, creating an experience that honors the past while embracing the present.
                     </p>
-                    <p class="text-base md:text-lg text-[#EAEAEA] font-light italic">
+                    <p class="text-xl text-[#DC143C] font-semibold italic">
                         "In every dish, I tell the story of my famiglia, my terra, and my passione."
                     </p>
                 </div>
@@ -439,100 +446,133 @@
         </div>
     </section>
 
-    <!-- Featured Dishes Section -->
-    <section id="menu" class="py-24 md:py-32 bg-gradient-to-b from-[#0D0D0D] to-[#1a1a1a]">
-        <div class="max-w-6xl mx-auto px-6 md:px-12">
-            <div class="text-center mb-16 fade-in-section">
-                <h2 class="text-4xl md:text-6xl mb-4 text-[#D4AF37]">Artistry on Every Plate</h2>
-                <p class="text-lg md:text-xl text-[#A8A8A8] max-w-2xl mx-auto">
-                    Handmade pastas, premium ingredients, and time-honored techniques define our culinary philosophy
-                </p>
+    <!-- Featured Highlights Section -->
+    <section class="py-20 px-6 content-section">
+        <div class="container mx-auto max-w-6xl">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center fade-in-up hover-lift p-8 rounded-lg content-card">
+                    <div class="w-16 h-16 bg-[#8B0000] rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl mb-3 text-white">Handmade Pastas</h3>
+                    <p class="text-gray-300">Crafted daily with recipes from Abruzzo's culinary heritage</p>
+                </div>
+
+                <div class="text-center fade-in-up hover-lift p-8 rounded-lg content-card">
+                    <div class="w-16 h-16 bg-[#8B0000] rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M3 2l2.01 18.23C5.13 21.23 5.97 22 7 22h10c1.03 0 1.87-.77 1.99-1.77L21 2H3zm9 17c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl mb-3 text-white">250+ Wine Labels</h3>
+                    <p class="text-gray-300">Curated selection from the finest vineyards of Italy and beyond</p>
+                </div>
+
+                <div class="text-center fade-in-up hover-lift p-8 rounded-lg content-card">
+                    <div class="w-16 h-16 bg-[#8B0000] rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl mb-3 text-white">Michelin Recognition</h3>
+                    <p class="text-gray-300">Excellence recognized by the world's most prestigious culinary guide</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Preview Section -->
+    <section id="menu" class="py-20 px-6 content-section">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="text-4xl md:text-5xl mb-4 text-[#DC143C]">Our Menu</h2>
+                <p class="text-xl text-gray-300">A celebration of authentic Italian flavors</p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- Dish 1 -->
-                <div class="fade-in-section menu-item">
-                    <div class="image-overlay shadow-ombra-hover rounded-sm mb-4">
-                        <img src="./materials/image_7.png" alt="Italian appetizer" class="w-full h-64 object-cover rounded-sm">
+                <!-- Antipasti -->
+                <div class="fade-in-up gallery-card content-card rounded-lg overflow-hidden">
+                    <div class="overflow-hidden">
+                        <img src="./materials/image_7.png" alt="Italian appetizer" class="w-full h-64 object-cover">
                     </div>
-                    <h3 class="text-xl md:text-2xl mb-2 text-[#EAEAEA]">Antipasti</h3>
-                    <p class="text-[#A8A8A8] text-sm md:text-base">
-                        Carefully curated starters featuring the finest local and imported ingredients
-                    </p>
+                    <div class="p-6">
+                        <h3 class="text-2xl mb-3 text-white">Antipasti</h3>
+                        <p class="text-gray-300">Carefully curated starters featuring the finest local and imported ingredients</p>
+                    </div>
                 </div>
 
-                <!-- Dish 2 -->
-                <div class="fade-in-section menu-item">
-                    <div class="image-overlay shadow-ombra-hover rounded-sm mb-4">
-                        <img src="./materials/image_14.png" alt="Handmade pasta" class="w-full h-64 object-cover rounded-sm">
+                <!-- Primi Piatti -->
+                <div class="fade-in-up gallery-card content-card rounded-lg overflow-hidden">
+                    <div class="overflow-hidden">
+                        <img src="./materials/image_14.png" alt="Handmade pasta" class="w-full h-64 object-cover">
                     </div>
-                    <h3 class="text-xl md:text-2xl mb-2 text-[#EAEAEA]">Primi Piatti</h3>
-                    <p class="text-[#A8A8A8] text-sm md:text-base">
-                        Handmade pastas crafted daily with recipes from Abruzzo's culinary heritage
-                    </p>
+                    <div class="p-6">
+                        <h3 class="text-2xl mb-3 text-white">Primi Piatti</h3>
+                        <p class="text-gray-300">Handmade pastas crafted daily with recipes from Abruzzo's culinary heritage</p>
+                    </div>
                 </div>
 
-                <!-- Dish 3 -->
-                <div class="fade-in-section menu-item">
-                    <div class="image-overlay shadow-ombra-hover rounded-sm mb-4">
-                        <img src="./materials/image_17.png" alt="Italian dessert" class="w-full h-64 object-cover rounded-sm">
+                <!-- Dolci -->
+                <div class="fade-in-up gallery-card content-card rounded-lg overflow-hidden">
+                    <div class="overflow-hidden">
+                        <img src="./materials/image_17.png" alt="Italian dessert" class="w-full h-64 object-cover">
                     </div>
-                    <h3 class="text-xl md:text-2xl mb-2 text-[#EAEAEA]">Dolci</h3>
-                    <p class="text-[#A8A8A8] text-sm md:text-base">
-                        Traditional desserts reimagined with modern elegance and artisanal craftsmanship
-                    </p>
+                    <div class="p-6">
+                        <h3 class="text-2xl mb-3 text-white">Dolci</h3>
+                        <p class="text-gray-300">Traditional desserts reimagined with modern elegance and artisanal craftsmanship</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="text-center mt-12 fade-in-section">
-                <a href="#contact" class="btn-secondary">View Full Menu</a>
+            <div class="text-center mt-12 fade-in-up">
+                <a href="#contact" class="inline-block bg-transparent border-2 border-[#DC143C] text-[#DC143C] px-10 py-4 rounded-full text-base uppercase tracking-wider hover:bg-[#DC143C] hover:text-white transition-all duration-300">
+                    View Full Menu
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Wine & Experience Section -->
-    <section id="experience" class="relative py-24 md:py-32">
-        <div class="absolute inset-0 parallax" style="background-image: url('./materials/image_11.png');">
-            <div class="absolute inset-0 bg-gradient-to-b from-[#0D0D0D] via-transparent to-[#0D0D0D] opacity-90"></div>
-        </div>
-
-        <div class="relative z-10 max-w-4xl mx-auto px-6 md:px-12 text-center">
-            <div class="fade-in-section content-pane glass p-12 md:p-16 rounded-sm shadow-ombra">
-                <h2 class="text-4xl md:text-5xl mb-6 text-[#D4AF37]">An Unforgettable Experience</h2>
-                <p class="text-lg md:text-xl text-[#A8A8A8] leading-relaxed mb-8">
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 px-6 content-section">
+        <div class="container mx-auto max-w-4xl">
+            <div class="text-center mb-12 fade-in-up content-card p-12 md:p-16 rounded-lg shadow-xl">
+                <h2 class="text-4xl md:text-5xl mb-6 text-[#DC143C]">An Unforgettable Experience</h2>
+                <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
                     Our sleek, modern interior creates an atmosphere of quiet luxury and intimacy. With over 250 carefully selected wine labels from around the world, each meal becomes a journey through the finest vineyards of Italy and beyond.
                 </p>
                 <div class="grid md:grid-cols-3 gap-8 mt-12">
-                    <div class="text-center">
-                        <div class="text-4xl md:text-5xl font-light text-[#D4AF37] mb-2">250+</div>
-                        <div class="text-sm md:text-base uppercase tracking-wide text-[#A8A8A8]">Wine Labels</div>
+                    <div class="text-center transform hover:scale-105 transition-transform duration-300">
+                        <div class="text-5xl font-light text-[#DC143C] mb-2">250+</div>
+                        <div class="text-sm uppercase tracking-wide text-gray-300">Wine Labels</div>
                     </div>
-                    <div class="text-center">
-                        <div class="text-4xl md:text-5xl font-light text-[#D4AF37] mb-2">130</div>
-                        <div class="text-sm md:text-base uppercase tracking-wide text-[#A8A8A8]">Years of Heritage</div>
+                    <div class="text-center transform hover:scale-105 transition-transform duration-300">
+                        <div class="text-5xl font-light text-[#DC143C] mb-2">130</div>
+                        <div class="text-sm uppercase tracking-wide text-gray-300">Years of Heritage</div>
                     </div>
-                    <div class="text-center">
-                        <div class="text-4xl md:text-5xl font-light text-[#D4AF37] mb-2">★</div>
-                        <div class="text-sm md:text-base uppercase tracking-wide text-[#A8A8A8]">Michelin Recognition</div>
+                    <div class="text-center transform hover:scale-105 transition-transform duration-300">
+                        <div class="text-5xl font-light text-[#DC143C] mb-2">★</div>
+                        <div class="text-sm uppercase tracking-wide text-gray-300">Michelin Recognition</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Awards & Recognition -->
-    <section class="py-24 md:py-32 bg-[#1a1a1a]">
-        <div class="max-w-6xl mx-auto px-6 md:px-12">
-            <div class="text-center fade-in-section">
-                <h2 class="text-3xl md:text-4xl mb-12 text-[#D4AF37]">Recognized Excellence</h2>
+    <!-- Awards Section -->
+    <section class="py-20 px-6 content-section">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center fade-in-up">
+                <h2 class="text-4xl mb-12 text-[#DC143C]">Recognized Excellence</h2>
                 <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-                    <div class="glass p-8 rounded-sm shadow-ombra">
-                        <p class="text-lg md:text-xl text-[#EAEAEA] mb-2">Top 10 Restaurant</p>
-                        <p class="text-sm text-[#A8A8A8]">Puerto Rico Wine Masters 2024</p>
+                    <div class="content-card p-8 rounded-lg shadow-xl hover-lift">
+                        <p class="text-xl text-white mb-2">Top 10 Restaurant</p>
+                        <p class="text-sm text-gray-300">Puerto Rico Wine Masters 2024</p>
                     </div>
-                    <div class="glass p-8 rounded-sm shadow-ombra">
-                        <p class="text-lg md:text-xl text-[#EAEAEA] mb-2">Michelin-Starred Chef</p>
-                        <p class="text-sm text-[#A8A8A8]">Chef Alfredo Esposito</p>
+                    <div class="content-card p-8 rounded-lg shadow-xl hover-lift">
+                        <p class="text-xl text-white mb-2">Michelin-Starred Chef</p>
+                        <p class="text-sm text-gray-300">Chef Alfredo Esposito</p>
                     </div>
                 </div>
             </div>
@@ -540,17 +580,17 @@
     </section>
 
     <!-- Contact & Reserve Section -->
-    <section id="contact" class="relative py-24 md:py-32">
-        <div class="max-w-6xl mx-auto px-6 md:px-12">
+    <section id="contact" class="py-20 px-6 content-section">
+        <div class="container mx-auto max-w-6xl">
             <div class="grid md:grid-cols-2 gap-12">
                 <!-- Contact Info -->
-                <div class="fade-in-section">
-                    <h2 class="text-4xl md:text-5xl mb-8 text-[#D4AF37]">Visit Us</h2>
+                <div class="fade-in-up">
+                    <h2 class="text-4xl md:text-5xl mb-8 text-[#DC143C]">Visit Us</h2>
 
                     <div class="space-y-6 mb-8">
                         <div>
-                            <h3 class="text-xl text-[#EAEAEA] mb-2 uppercase tracking-wide">Location</h3>
-                            <p class="text-[#A8A8A8] text-base md:text-lg">
+                            <h3 class="text-xl text-white mb-2 uppercase tracking-wide">Location</h3>
+                            <p class="text-gray-300 text-lg">
                                 303 Calle Villamil<br>
                                 Lobby Metro Plaza Towers<br>
                                 San Juan, PR 00907
@@ -558,69 +598,69 @@
                         </div>
 
                         <div>
-                            <h3 class="text-xl text-[#EAEAEA] mb-2 uppercase tracking-wide">Hours</h3>
-                            <p class="text-[#A8A8A8] text-base md:text-lg">
+                            <h3 class="text-xl text-white mb-2 uppercase tracking-wide">Hours</h3>
+                            <p class="text-gray-300 text-lg">
                                 Tuesday - Saturday: 6:00 PM - 11:00 PM<br>
                                 Sunday - Monday: Closed
                             </p>
                         </div>
 
                         <div>
-                            <h3 class="text-xl text-[#EAEAEA] mb-2 uppercase tracking-wide">Contact</h3>
-                            <p class="text-[#A8A8A8] text-base md:text-lg">
-                                Phone: <a href="tel:7877050822" class="hover:text-[#D4AF37] transition-colors">787.705.0822</a><br>
-                                Email: <a href="mailto:ombrasj@gmail.com" class="hover:text-[#D4AF37] transition-colors">ombrasj@gmail.com</a>
+                            <h3 class="text-xl text-white mb-2 uppercase tracking-wide">Contact</h3>
+                            <p class="text-gray-300 text-lg">
+                                Phone: <a href="tel:7877050822" class="hover:text-[#DC143C] transition-colors">787.705.0822</a><br>
+                                Email: <a href="mailto:ombrasj@gmail.com" class="hover:text-[#DC143C] transition-colors">ombrasj@gmail.com</a>
                             </p>
                         </div>
                     </div>
 
                     <div class="flex gap-4 mb-8">
-                        <a href="https://www.facebook.com/Ombrapr/" target="_blank" rel="noopener noreferrer" class="hover:opacity-80 transition-opacity">
-                            <img src="./materials/image_5.png" alt="Facebook" class="w-10 h-10">
+                        <a href="https://www.facebook.com/Ombrapr/" target="_blank" rel="noopener noreferrer" class="w-12 h-12 bg-[#8B0000] rounded-full flex items-center justify-center hover:bg-[#DC143C] transition-colors">
+                            <img src="./materials/image_5.png" alt="Facebook" class="w-6 h-6 brightness-0 invert">
                         </a>
-                        <a href="https://www.instagram.com/ombrapr/" target="_blank" rel="noopener noreferrer" class="hover:opacity-80 transition-opacity">
-                            <img src="./materials/image_0.png" alt="Instagram" class="w-10 h-10">
+                        <a href="https://www.instagram.com/ombrapr/" target="_blank" rel="noopener noreferrer" class="w-12 h-12 bg-[#8B0000] rounded-full flex items-center justify-center hover:bg-[#DC143C] transition-colors">
+                            <img src="./materials/image_0.png" alt="Instagram" class="w-6 h-6 brightness-0 invert">
                         </a>
-                        <a href="#" target="_blank" rel="noopener noreferrer" class="hover:opacity-80 transition-opacity">
-                            <img src="./materials/image_1.png" alt="TikTok" class="w-10 h-10">
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="w-12 h-12 bg-[#8B0000] rounded-full flex items-center justify-center hover:bg-[#DC143C] transition-colors">
+                            <img src="./materials/image_1.png" alt="TikTok" class="w-6 h-6 brightness-0 invert">
                         </a>
                     </div>
                 </div>
 
                 <!-- Reservation Form -->
-                <div id="reserve" class="fade-in-section glass p-8 md:p-12 rounded-sm shadow-ombra">
-                    <h2 class="text-3xl md:text-4xl mb-6 text-[#D4AF37]">Reserve Your Table</h2>
-                    <p class="text-[#A8A8A8] mb-8">
+                <div id="reserve" class="fade-in-up content-card p-8 md:p-12 rounded-lg shadow-xl">
+                    <h2 class="text-3xl md:text-4xl mb-6 text-[#DC143C]">Reserve Your Table</h2>
+                    <p class="text-gray-300 mb-8">
                         Experience the art of Italian dining. Book your reservation today.
                     </p>
 
                     <form class="space-y-6" id="reservationForm">
                         <div>
                             <input type="text" placeholder="Full Name" required
-                                   class="w-full bg-[#0D0D0D] border border-[#A8A8A8]/30 rounded-sm px-4 py-3 text-[#EAEAEA] focus:outline-none focus:border-[#D4AF37] transition-colors">
+                                   class="w-full bg-black bg-opacity-50 border border-[#8B0000] border-opacity-40 rounded px-4 py-3 text-white focus:outline-none focus:border-[#DC143C] transition-colors">
                         </div>
 
                         <div>
                             <input type="email" placeholder="Email Address" required
-                                   class="w-full bg-[#0D0D0D] border border-[#A8A8A8]/30 rounded-sm px-4 py-3 text-[#EAEAEA] focus:outline-none focus:border-[#D4AF37] transition-colors">
+                                   class="w-full bg-black bg-opacity-50 border border-[#8B0000] border-opacity-40 rounded px-4 py-3 text-white focus:outline-none focus:border-[#DC143C] transition-colors">
                         </div>
 
                         <div>
                             <input type="tel" placeholder="Phone Number" required
-                                   class="w-full bg-[#0D0D0D] border border-[#A8A8A8]/30 rounded-sm px-4 py-3 text-[#EAEAEA] focus:outline-none focus:border-[#D4AF37] transition-colors">
+                                   class="w-full bg-black bg-opacity-50 border border-[#8B0000] border-opacity-40 rounded px-4 py-3 text-white focus:outline-none focus:border-[#DC143C] transition-colors">
                         </div>
 
                         <div class="grid grid-cols-2 gap-4">
                             <input type="date" required
-                                   class="w-full bg-[#0D0D0D] border border-[#A8A8A8]/30 rounded-sm px-4 py-3 text-[#EAEAEA] focus:outline-none focus:border-[#D4AF37] transition-colors">
+                                   class="w-full bg-black bg-opacity-50 border border-[#8B0000] border-opacity-40 rounded px-4 py-3 text-white focus:outline-none focus:border-[#DC143C] transition-colors">
 
                             <input type="time" required
-                                   class="w-full bg-[#0D0D0D] border border-[#A8A8A8]/30 rounded-sm px-4 py-3 text-[#EAEAEA] focus:outline-none focus:border-[#D4AF37] transition-colors">
+                                   class="w-full bg-black bg-opacity-50 border border-[#8B0000] border-opacity-40 rounded px-4 py-3 text-white focus:outline-none focus:border-[#DC143C] transition-colors">
                         </div>
 
                         <div>
                             <select required
-                                    class="w-full bg-[#0D0D0D] border border-[#A8A8A8]/30 rounded-sm px-4 py-3 text-[#EAEAEA] focus:outline-none focus:border-[#D4AF37] transition-colors">
+                                    class="w-full bg-black bg-opacity-50 border border-[#8B0000] border-opacity-40 rounded px-4 py-3 text-white focus:outline-none focus:border-[#DC143C] transition-colors">
                                 <option value="">Number of Guests</option>
                                 <option value="1">1 Guest</option>
                                 <option value="2">2 Guests</option>
@@ -634,14 +674,14 @@
 
                         <div>
                             <textarea placeholder="Special Requests (Optional)" rows="3"
-                                      class="w-full bg-[#0D0D0D] border border-[#A8A8A8]/30 rounded-sm px-4 py-3 text-[#EAEAEA] focus:outline-none focus:border-[#D4AF37] transition-colors resize-none"></textarea>
+                                      class="w-full bg-black bg-opacity-50 border border-[#8B0000] border-opacity-40 rounded px-4 py-3 text-white focus:outline-none focus:border-[#DC143C] transition-colors resize-none"></textarea>
                         </div>
 
-                        <button type="submit" class="btn-primary w-full">
+                        <button type="submit" class="btn-primary w-full bg-[#8B0000] text-white px-8 py-4 rounded-full text-base uppercase tracking-wider hover:bg-[#DC143C] transition-all duration-300 shadow-lg">
                             Confirm Reservation
                         </button>
 
-                        <p class="text-sm text-[#A8A8A8] text-center">
+                        <p class="text-sm text-gray-400 text-center">
                             For parties of 7 or more, please call us directly at 787.705.0822
                         </p>
                     </form>
@@ -651,71 +691,25 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-[#0D0D0D] border-t border-[#1a1a1a] py-12">
-        <div class="max-w-6xl mx-auto px-6 md:px-12">
-            <div class="grid md:grid-cols-3 gap-8 mb-8">
-                <!-- Brand -->
-                <div>
-                    <h3 class="text-2xl font-light tracking-wider mb-4">OMBRA</h3>
-                    <p class="text-[#A8A8A8] text-sm leading-relaxed">
-                        Where tradition meets innovation in the heart of San Juan. A culinary sanctuary crafted by Michelin-starred Chef Alfredo Esposito.
-                    </p>
+    <footer class="bg-black bg-opacity-70 text-white py-12 px-6 content-section border-t border-[#8B0000]">
+        <div class="container mx-auto max-w-6xl">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <p class="text-3xl font-light tracking-widest" style="letter-spacing: 0.2em;">OMBRA</p>
+                    <p class="text-sm text-gray-400 mt-2">Where tradition meets innovation in San Juan</p>
                 </div>
 
-                <!-- Quick Links -->
-                <div>
-                    <h4 class="text-lg uppercase tracking-wide mb-4 text-[#EAEAEA]">Quick Links</h4>
-                    <ul class="space-y-2 text-[#A8A8A8] text-sm">
-                        <li><a href="#story" class="hover:text-[#D4AF37] transition-colors">Our Story</a></li>
-                        <li><a href="#menu" class="hover:text-[#D4AF37] transition-colors">Menu</a></li>
-                        <li><a href="#experience" class="hover:text-[#D4AF37] transition-colors">Experience</a></li>
-                        <li><a href="#reserve" class="hover:text-[#D4AF37] transition-colors">Reservations</a></li>
-                    </ul>
+                <div class="text-center md:text-right">
+                    <p class="text-gray-400 mb-2">&copy; 2025 Ombra Italian Eatery</p>
+                    <p class="text-gray-400">Crafted with passion by Chef Alfredo Esposito</p>
                 </div>
-
-                <!-- Newsletter -->
-                <div>
-                    <h4 class="text-lg uppercase tracking-wide mb-4 text-[#EAEAEA]">Stay Connected</h4>
-                    <p class="text-[#A8A8A8] text-sm mb-4">
-                        Subscribe to receive exclusive offers and culinary updates
-                    </p>
-                    <form class="flex gap-2" id="newsletterForm">
-                        <input type="email" placeholder="Your email" required
-                               class="flex-1 bg-[#1a1a1a] border border-[#A8A8A8]/30 rounded-sm px-4 py-2 text-[#EAEAEA] text-sm focus:outline-none focus:border-[#D4AF37] transition-colors">
-                        <button type="submit" class="bg-[#D4AF37] text-[#0D0D0D] px-6 py-2 rounded-sm hover:bg-[#E5C158] transition-colors text-sm font-medium">
-                            Subscribe
-                        </button>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Bottom Footer -->
-            <div class="border-t border-[#1a1a1a] pt-8 text-center">
-                <p class="text-[#A8A8A8] text-sm">
-                    &copy; 2025 Ombra Italian Eatery. All rights reserved. | 303 Calle Villamil, San Juan, PR 00907
-                </p>
             </div>
         </div>
     </footer>
 
+    <!-- JavaScript -->
     <script>
-        // Navbar scroll effect
-        const navbar = document.getElementById('navbar');
-        let lastScroll = 0;
-
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-
-            if (currentScroll > 100) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-
-            lastScroll = currentScroll;
-        });
-
-        // Mobile menu toggle
+        // Mobile Menu Toggle
         const hamburger = document.getElementById('hamburger');
         const mobileMenu = document.getElementById('mobileMenu');
         const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
@@ -734,9 +728,25 @@
             });
         });
 
-        // Intersection Observer for fade-in animations
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        // Fade In Up Animation on Scroll
         const observerOptions = {
-            threshold: 0.2,
+            threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         };
 
@@ -748,58 +758,41 @@
             });
         }, observerOptions);
 
-        // Observe all fade-in sections
-        document.querySelectorAll('.fade-in-section').forEach(section => {
-            observer.observe(section);
+        // Observe all elements with fade-in-up class
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            observer.observe(el);
         });
 
-        // Observe content panes
-        document.querySelectorAll('.content-pane').forEach(pane => {
-            observer.observe(pane);
-        });
-
-        // Form submission handlers
-        document.getElementById('reservationForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Thank you for your reservation request! We will contact you shortly to confirm your booking.');
-            e.target.reset();
-        });
-
-        document.getElementById('newsletterForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Thank you for subscribing to our newsletter!');
-            e.target.reset();
-        });
-
-        // Smooth scroll for anchor links
+        // Smooth Scroll for Navigation Links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    const offsetTop = target.offsetTop - 80;
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
                     });
                 }
             });
         });
 
-        // Parallax effect for background images
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallaxElements = document.querySelectorAll('.parallax');
-
-            parallaxElements.forEach(element => {
-                const speed = 0.5;
-                element.style.transform = `translateY(${scrolled * speed}px)`;
+        // Form Submission Handler
+        const reservationForm = document.getElementById('reservationForm');
+        if (reservationForm) {
+            reservationForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Thank you for your reservation request! We will contact you soon to confirm your booking.');
+                reservationForm.reset();
             });
-        });
+        }
 
         // Set minimum date for reservation to today
         const today = new Date().toISOString().split('T')[0];
-        document.querySelector('input[type="date"]').setAttribute('min', today);
+        const dateInput = document.querySelector('input[type="date"]');
+        if (dateInput) {
+            dateInput.setAttribute('min', today);
+        }
     </script>
 </body>
 </html>
