@@ -3,9 +3,803 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website</title>
+    <title>Ombra Italian Eatery | Michelin-Starred Dining in San Juan</title>
+    <meta name="description" content="Experience authentic Italian cuisine by Michelin-starred Chef Alfredo Esposito in the heart of San Juan, Puerto Rico. Modern elegance meets traditional flavors.">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #0D0D0D;
+            color: #EAEAEA;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 200;
+            letter-spacing: -0.025em;
+        }
+
+        /* Custom Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInFromRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero-title {
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        .hero-subtitle {
+            animation: fadeInUp 1s ease-out 0.8s both;
+        }
+
+        .hero-cta {
+            animation: fadeInUp 1s ease-out 1.1s both;
+        }
+
+        .content-pane {
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out, backdrop-filter 0.8s ease-in-out;
+        }
+
+        .content-pane.visible {
+            opacity: 1;
+            backdrop-filter: blur(8px);
+        }
+
+        /* Parallax effect */
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        /* Navigation styles */
+        nav {
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            backdrop-filter: blur(12px);
+            background-color: rgba(13, 13, 13, 0.9);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: #D4AF37;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link:hover {
+            color: #D4AF37;
+        }
+
+        /* Button styles */
+        .btn-primary {
+            background-color: #D4AF37;
+            color: #0D0D0D;
+            padding: 12px 32px;
+            border-radius: 2px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #E5C158;
+            box-shadow: 0 6px 25px rgba(212, 175, 55, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: #D4AF37;
+            padding: 12px 32px;
+            border: 1px solid #D4AF37;
+            border-radius: 2px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn-secondary:hover {
+            background-color: #D4AF37;
+            color: #0D0D0D;
+            transform: translateY(-2px);
+        }
+
+        /* Menu item hover effect */
+        .menu-item {
+            transition: all 0.3s ease-in;
+            padding: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .menu-item:hover {
+            background-color: #1a1a1a;
+            color: #D4AF37;
+        }
+
+        /* Image overlay effects */
+        .image-overlay {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-overlay::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(13, 13, 13, 0.3), rgba(13, 13, 13, 0.7));
+            z-index: 1;
+        }
+
+        .image-overlay img {
+            transition: transform 0.6s ease;
+        }
+
+        .image-overlay:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Shadow effects for Ombra theme */
+        .shadow-ombra {
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .shadow-ombra-hover {
+            transition: box-shadow 0.3s ease;
+        }
+
+        .shadow-ombra-hover:hover {
+            box-shadow: 0 15px 50px rgba(212, 175, 55, 0.2), 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Glass morphism */
+        .glass {
+            background: rgba(26, 26, 26, 0.3);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(234, 234, 234, 0.1);
+        }
+
+        /* Hero section */
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(13, 13, 13, 0.4), rgba(13, 13, 13, 0.7));
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Fade in on scroll */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(13, 13, 13, 0.98);
+            z-index: 1000;
+            padding: 80px 20px 20px;
+            flex-direction: column;
+            gap: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background-color: #EAEAEA;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .desktop-nav {
+                display: none;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0D0D0D;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #1a1a1a;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D4AF37;
+        }
+    </style>
 </head>
 <body>
-    <!-- Content will be added here -->
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 py-4 px-6 md:px-12 transition-all duration-300">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-2xl font-light tracking-wider">
+                <a href="#" class="text-white hover:text-[#D4AF37] transition-colors duration-300">OMBRA</a>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <div class="desktop-nav hidden md:flex items-center gap-8">
+                <a href="#story" class="nav-link text-sm uppercase tracking-wide">Our Story</a>
+                <a href="#menu" class="nav-link text-sm uppercase tracking-wide">Menu</a>
+                <a href="#experience" class="nav-link text-sm uppercase tracking-wide">Experience</a>
+                <a href="#contact" class="nav-link text-sm uppercase tracking-wide">Contact</a>
+                <a href="#reserve" class="btn-primary text-sm">Reserve</a>
+            </div>
+
+            <!-- Mobile Hamburger -->
+            <div class="hamburger md:hidden" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#story" class="text-2xl uppercase tracking-wide text-center hover:text-[#D4AF37] transition-colors mobile-menu-link">Our Story</a>
+        <a href="#menu" class="text-2xl uppercase tracking-wide text-center hover:text-[#D4AF37] transition-colors mobile-menu-link">Menu</a>
+        <a href="#experience" class="text-2xl uppercase tracking-wide text-center hover:text-[#D4AF37] transition-colors mobile-menu-link">Experience</a>
+        <a href="#contact" class="text-2xl uppercase tracking-wide text-center hover:text-[#D4AF37] transition-colors mobile-menu-link">Contact</a>
+        <a href="#reserve" class="btn-primary text-center mobile-menu-link">Reserve a Table</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <img src="./materials/image_3.png" alt="Ombra Italian Eatery Interior" class="absolute inset-0 w-full h-full object-cover">
+        <div class="hero-content">
+            <h1 class="hero-title text-5xl md:text-7xl lg:text-8xl font-extralight tracking-tight mb-6">OMBRA</h1>
+            <p class="hero-subtitle text-xl md:text-2xl font-light text-[#A8A8A8] mb-8 tracking-wide">A Culinary Journey by Chef Alfredo Esposito</p>
+            <a href="#reserve" class="hero-cta btn-primary">Reserve a Table</a>
+        </div>
+    </section>
+
+    <!-- Chef Story Section -->
+    <section id="story" class="relative py-24 md:py-32 overflow-hidden">
+        <div class="absolute inset-0">
+            <img src="./materials/image_8.jpg" alt="Restaurant ambiance" class="w-full h-full object-cover opacity-20">
+        </div>
+
+        <div class="relative z-10 max-w-6xl mx-auto px-6 md:px-12">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="fade-in-section">
+                    <div class="image-overlay shadow-ombra">
+                        <img src="./materials/image_10.jpg" alt="Chef Alfredo Esposito" class="w-full h-auto rounded-sm">
+                    </div>
+                </div>
+
+                <div class="fade-in-section content-pane glass p-8 md:p-12 rounded-sm shadow-ombra">
+                    <h2 class="text-3xl md:text-5xl mb-6 text-[#D4AF37]">The Legacy of Chef Alfredo Esposito</h2>
+                    <p class="text-base md:text-lg text-[#A8A8A8] leading-relaxed mb-6">
+                        Born in Abruzzo, Italy, Chef Alfredo Esposito carries forward a 130-year family culinary tradition. His journey from the hills of Italy to the vibrant streets of San Juan has been marked by Michelin recognition and an unwavering commitment to authentic Italian cuisine.
+                    </p>
+                    <p class="text-base md:text-lg text-[#A8A8A8] leading-relaxed mb-6">
+                        At Ombra, Chef Esposito weaves together traditional recipes passed down through generations with innovative Mediterranean techniques, creating an experience that honors the past while embracing the present.
+                    </p>
+                    <p class="text-base md:text-lg text-[#EAEAEA] font-light italic">
+                        "In every dish, I tell the story of my famiglia, my terra, and my passione."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Dishes Section -->
+    <section id="menu" class="py-24 md:py-32 bg-gradient-to-b from-[#0D0D0D] to-[#1a1a1a]">
+        <div class="max-w-6xl mx-auto px-6 md:px-12">
+            <div class="text-center mb-16 fade-in-section">
+                <h2 class="text-4xl md:text-6xl mb-4 text-[#D4AF37]">Artistry on Every Plate</h2>
+                <p class="text-lg md:text-xl text-[#A8A8A8] max-w-2xl mx-auto">
+                    Handmade pastas, premium ingredients, and time-honored techniques define our culinary philosophy
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Dish 1 -->
+                <div class="fade-in-section menu-item">
+                    <div class="image-overlay shadow-ombra-hover rounded-sm mb-4">
+                        <img src="./materials/image_7.png" alt="Italian appetizer" class="w-full h-64 object-cover rounded-sm">
+                    </div>
+                    <h3 class="text-xl md:text-2xl mb-2 text-[#EAEAEA]">Antipasti</h3>
+                    <p class="text-[#A8A8A8] text-sm md:text-base">
+                        Carefully curated starters featuring the finest local and imported ingredients
+                    </p>
+                </div>
+
+                <!-- Dish 2 -->
+                <div class="fade-in-section menu-item">
+                    <div class="image-overlay shadow-ombra-hover rounded-sm mb-4">
+                        <img src="./materials/image_14.png" alt="Handmade pasta" class="w-full h-64 object-cover rounded-sm">
+                    </div>
+                    <h3 class="text-xl md:text-2xl mb-2 text-[#EAEAEA]">Primi Piatti</h3>
+                    <p class="text-[#A8A8A8] text-sm md:text-base">
+                        Handmade pastas crafted daily with recipes from Abruzzo's culinary heritage
+                    </p>
+                </div>
+
+                <!-- Dish 3 -->
+                <div class="fade-in-section menu-item">
+                    <div class="image-overlay shadow-ombra-hover rounded-sm mb-4">
+                        <img src="./materials/image_17.png" alt="Italian dessert" class="w-full h-64 object-cover rounded-sm">
+                    </div>
+                    <h3 class="text-xl md:text-2xl mb-2 text-[#EAEAEA]">Dolci</h3>
+                    <p class="text-[#A8A8A8] text-sm md:text-base">
+                        Traditional desserts reimagined with modern elegance and artisanal craftsmanship
+                    </p>
+                </div>
+            </div>
+
+            <div class="text-center mt-12 fade-in-section">
+                <a href="#contact" class="btn-secondary">View Full Menu</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wine & Experience Section -->
+    <section id="experience" class="relative py-24 md:py-32">
+        <div class="absolute inset-0 parallax" style="background-image: url('./materials/image_11.png');">
+            <div class="absolute inset-0 bg-gradient-to-b from-[#0D0D0D] via-transparent to-[#0D0D0D] opacity-90"></div>
+        </div>
+
+        <div class="relative z-10 max-w-4xl mx-auto px-6 md:px-12 text-center">
+            <div class="fade-in-section content-pane glass p-12 md:p-16 rounded-sm shadow-ombra">
+                <h2 class="text-4xl md:text-5xl mb-6 text-[#D4AF37]">An Unforgettable Experience</h2>
+                <p class="text-lg md:text-xl text-[#A8A8A8] leading-relaxed mb-8">
+                    Our sleek, modern interior creates an atmosphere of quiet luxury and intimacy. With over 250 carefully selected wine labels from around the world, each meal becomes a journey through the finest vineyards of Italy and beyond.
+                </p>
+                <div class="grid md:grid-cols-3 gap-8 mt-12">
+                    <div class="text-center">
+                        <div class="text-4xl md:text-5xl font-light text-[#D4AF37] mb-2">250+</div>
+                        <div class="text-sm md:text-base uppercase tracking-wide text-[#A8A8A8]">Wine Labels</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl md:text-5xl font-light text-[#D4AF37] mb-2">130</div>
+                        <div class="text-sm md:text-base uppercase tracking-wide text-[#A8A8A8]">Years of Heritage</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl md:text-5xl font-light text-[#D4AF37] mb-2">★</div>
+                        <div class="text-sm md:text-base uppercase tracking-wide text-[#A8A8A8]">Michelin Recognition</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards & Recognition -->
+    <section class="py-24 md:py-32 bg-[#1a1a1a]">
+        <div class="max-w-6xl mx-auto px-6 md:px-12">
+            <div class="text-center fade-in-section">
+                <h2 class="text-3xl md:text-4xl mb-12 text-[#D4AF37]">Recognized Excellence</h2>
+                <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+                    <div class="glass p-8 rounded-sm shadow-ombra">
+                        <p class="text-lg md:text-xl text-[#EAEAEA] mb-2">Top 10 Restaurant</p>
+                        <p class="text-sm text-[#A8A8A8]">Puerto Rico Wine Masters 2024</p>
+                    </div>
+                    <div class="glass p-8 rounded-sm shadow-ombra">
+                        <p class="text-lg md:text-xl text-[#EAEAEA] mb-2">Michelin-Starred Chef</p>
+                        <p class="text-sm text-[#A8A8A8]">Chef Alfredo Esposito</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Reserve Section -->
+    <section id="contact" class="relative py-24 md:py-32">
+        <div class="max-w-6xl mx-auto px-6 md:px-12">
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Contact Info -->
+                <div class="fade-in-section">
+                    <h2 class="text-4xl md:text-5xl mb-8 text-[#D4AF37]">Visit Us</h2>
+
+                    <div class="space-y-6 mb-8">
+                        <div>
+                            <h3 class="text-xl text-[#EAEAEA] mb-2 uppercase tracking-wide">Location</h3>
+                            <p class="text-[#A8A8A8] text-base md:text-lg">
+                                303 Calle Villamil<br>
+                                Lobby Metro Plaza Towers<br>
+                                San Juan, PR 00907
+                            </p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl text-[#EAEAEA] mb-2 uppercase tracking-wide">Hours</h3>
+                            <p class="text-[#A8A8A8] text-base md:text-lg">
+                                Tuesday - Saturday: 6:00 PM - 11:00 PM<br>
+                                Sunday - Monday: Closed
+                            </p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl text-[#EAEAEA] mb-2 uppercase tracking-wide">Contact</h3>
+                            <p class="text-[#A8A8A8] text-base md:text-lg">
+                                Phone: <a href="tel:7877050822" class="hover:text-[#D4AF37] transition-colors">787.705.0822</a><br>
+                                Email: <a href="mailto:ombrasj@gmail.com" class="hover:text-[#D4AF37] transition-colors">ombrasj@gmail.com</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 mb-8">
+                        <a href="https://www.facebook.com/Ombrapr/" target="_blank" rel="noopener noreferrer" class="hover:opacity-80 transition-opacity">
+                            <img src="./materials/image_5.png" alt="Facebook" class="w-10 h-10">
+                        </a>
+                        <a href="https://www.instagram.com/ombrapr/" target="_blank" rel="noopener noreferrer" class="hover:opacity-80 transition-opacity">
+                            <img src="./materials/image_0.png" alt="Instagram" class="w-10 h-10">
+                        </a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="hover:opacity-80 transition-opacity">
+                            <img src="./materials/image_1.png" alt="TikTok" class="w-10 h-10">
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Reservation Form -->
+                <div id="reserve" class="fade-in-section glass p-8 md:p-12 rounded-sm shadow-ombra">
+                    <h2 class="text-3xl md:text-4xl mb-6 text-[#D4AF37]">Reserve Your Table</h2>
+                    <p class="text-[#A8A8A8] mb-8">
+                        Experience the art of Italian dining. Book your reservation today.
+                    </p>
+
+                    <form class="space-y-6" id="reservationForm">
+                        <div>
+                            <input type="text" placeholder="Full Name" required
+                                   class="w-full bg-[#0D0D0D] border border-[#A8A8A8]/30 rounded-sm px-4 py-3 text-[#EAEAEA] focus:outline-none focus:border-[#D4AF37] transition-colors">
+                        </div>
+
+                        <div>
+                            <input type="email" placeholder="Email Address" required
+                                   class="w-full bg-[#0D0D0D] border border-[#A8A8A8]/30 rounded-sm px-4 py-3 text-[#EAEAEA] focus:outline-none focus:border-[#D4AF37] transition-colors">
+                        </div>
+
+                        <div>
+                            <input type="tel" placeholder="Phone Number" required
+                                   class="w-full bg-[#0D0D0D] border border-[#A8A8A8]/30 rounded-sm px-4 py-3 text-[#EAEAEA] focus:outline-none focus:border-[#D4AF37] transition-colors">
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <input type="date" required
+                                   class="w-full bg-[#0D0D0D] border border-[#A8A8A8]/30 rounded-sm px-4 py-3 text-[#EAEAEA] focus:outline-none focus:border-[#D4AF37] transition-colors">
+
+                            <input type="time" required
+                                   class="w-full bg-[#0D0D0D] border border-[#A8A8A8]/30 rounded-sm px-4 py-3 text-[#EAEAEA] focus:outline-none focus:border-[#D4AF37] transition-colors">
+                        </div>
+
+                        <div>
+                            <select required
+                                    class="w-full bg-[#0D0D0D] border border-[#A8A8A8]/30 rounded-sm px-4 py-3 text-[#EAEAEA] focus:outline-none focus:border-[#D4AF37] transition-colors">
+                                <option value="">Number of Guests</option>
+                                <option value="1">1 Guest</option>
+                                <option value="2">2 Guests</option>
+                                <option value="3">3 Guests</option>
+                                <option value="4">4 Guests</option>
+                                <option value="5">5 Guests</option>
+                                <option value="6">6 Guests</option>
+                                <option value="7+">7+ Guests</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <textarea placeholder="Special Requests (Optional)" rows="3"
+                                      class="w-full bg-[#0D0D0D] border border-[#A8A8A8]/30 rounded-sm px-4 py-3 text-[#EAEAEA] focus:outline-none focus:border-[#D4AF37] transition-colors resize-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-primary w-full">
+                            Confirm Reservation
+                        </button>
+
+                        <p class="text-sm text-[#A8A8A8] text-center">
+                            For parties of 7 or more, please call us directly at 787.705.0822
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#0D0D0D] border-t border-[#1a1a1a] py-12">
+        <div class="max-w-6xl mx-auto px-6 md:px-12">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <!-- Brand -->
+                <div>
+                    <h3 class="text-2xl font-light tracking-wider mb-4">OMBRA</h3>
+                    <p class="text-[#A8A8A8] text-sm leading-relaxed">
+                        Where tradition meets innovation in the heart of San Juan. A culinary sanctuary crafted by Michelin-starred Chef Alfredo Esposito.
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg uppercase tracking-wide mb-4 text-[#EAEAEA]">Quick Links</h4>
+                    <ul class="space-y-2 text-[#A8A8A8] text-sm">
+                        <li><a href="#story" class="hover:text-[#D4AF37] transition-colors">Our Story</a></li>
+                        <li><a href="#menu" class="hover:text-[#D4AF37] transition-colors">Menu</a></li>
+                        <li><a href="#experience" class="hover:text-[#D4AF37] transition-colors">Experience</a></li>
+                        <li><a href="#reserve" class="hover:text-[#D4AF37] transition-colors">Reservations</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h4 class="text-lg uppercase tracking-wide mb-4 text-[#EAEAEA]">Stay Connected</h4>
+                    <p class="text-[#A8A8A8] text-sm mb-4">
+                        Subscribe to receive exclusive offers and culinary updates
+                    </p>
+                    <form class="flex gap-2" id="newsletterForm">
+                        <input type="email" placeholder="Your email" required
+                               class="flex-1 bg-[#1a1a1a] border border-[#A8A8A8]/30 rounded-sm px-4 py-2 text-[#EAEAEA] text-sm focus:outline-none focus:border-[#D4AF37] transition-colors">
+                        <button type="submit" class="bg-[#D4AF37] text-[#0D0D0D] px-6 py-2 rounded-sm hover:bg-[#E5C158] transition-colors text-sm font-medium">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Bottom Footer -->
+            <div class="border-t border-[#1a1a1a] pt-8 text-center">
+                <p class="text-[#A8A8A8] text-sm">
+                    &copy; 2025 Ombra Italian Eatery. All rights reserved. | 303 Calle Villamil, San Juan, PR 00907
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        });
+
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in sections
+        document.querySelectorAll('.fade-in-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Observe content panes
+        document.querySelectorAll('.content-pane').forEach(pane => {
+            observer.observe(pane);
+        });
+
+        // Form submission handlers
+        document.getElementById('reservationForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your reservation request! We will contact you shortly to confirm your booking.');
+            e.target.reset();
+        });
+
+        document.getElementById('newsletterForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for subscribing to our newsletter!');
+            e.target.reset();
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Parallax effect for background images
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.parallax');
+
+            parallaxElements.forEach(element => {
+                const speed = 0.5;
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Set minimum date for reservation to today
+        const today = new Date().toISOString().split('T')[0];
+        document.querySelector('input[type="date"]').setAttribute('min', today);
+    </script>
 </body>
 </html>
